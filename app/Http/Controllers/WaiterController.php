@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWaiterRequest;
 use App\Http\Requests\UpdateWaiterRequest;
+use App\Http\Resources\WaiterResource;
 use App\Models\Waiter;
 
 class WaiterController extends Controller
@@ -15,7 +16,7 @@ class WaiterController extends Controller
      */
     public function index()
     {
-        return Waiter::all();
+        return WaiterResource::collection(Waiter::all());
     }
 
     /**
@@ -28,7 +29,9 @@ class WaiterController extends Controller
     {
         $fiels = $request->validated();
 
-        Waiter::create($fiels);
+        $waiter = Waiter::create($fiels);
+
+        return WaiterResource::make($waiter);
     }
 
     /**
