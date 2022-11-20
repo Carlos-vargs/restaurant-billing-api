@@ -29,7 +29,9 @@ class CustomerController extends Controller
     {
         $fiels = $request->validated();
 
-        Customer::create($fiels);
+        $customer = Customer::create($fiels);
+
+        return CustomerResource::make($customer);
     }
 
     /**
