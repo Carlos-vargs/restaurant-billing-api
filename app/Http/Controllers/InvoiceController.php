@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\Customer;
 use App\Models\Invoice;
 
 class InvoiceController extends Controller
@@ -26,7 +27,30 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        //
+        $fiels = $request->validated();
+
+        /**
+         *  last customer is used because
+         *  in the java app we can't get the payload
+         */
+        $lastCustomer = Customer::query()->latest()->first();
+
+        $invocie = $lastCustomer->invoices()->create([
+            'total' => $fiels['total'],
+            'iva' => $fiels['iva'],
+            'descuento' => $fiels['descuento'],
+            'modo_pago' => $fiels['modo_pago'],
+            'subtotal' => $fiels['subtotal'],
+            'waiter_id' => $fiels['mesero'],
+        ]);
+
+        foreach ($fiels['productos'] as $product) {
+
+            $invocie->products()->attach($product['id'], [
+                'cantidad' => $product['cantidad'],
+                'precio' => $product['precio'],
+            ]);
+        }
     }
 
     /**
