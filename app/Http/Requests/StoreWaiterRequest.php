@@ -24,7 +24,7 @@ class StoreWaiterRequest extends FormRequest
     public function rules()
     {
         return [
-            'cedula_empleado' => 'required|string',
+            'cedula_mesero' => 'required|string',
             'primer_nombre' => 'required|string',
             'segundo_nombre' => 'nullable|string',
             'primer_apellido' => 'required|string',

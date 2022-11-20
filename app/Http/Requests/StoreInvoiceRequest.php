@@ -27,12 +27,10 @@ class StoreInvoiceRequest extends FormRequest
             'total' => 'required',
             'iva' => 'required',
             'descuento' => 'required',
-            'modo_pago' => 'required',
+            'modo_pago' => 'required|string',
             'subtotal' => 'required',
-            'cantidad' => 'required',
-            'precio' => 'required',
-            'waiter_id' => 'required',
-            'products' => 'required|array',
+            'mesero' => 'required',
+            'productos' => 'required',
         ];
     }
 }
