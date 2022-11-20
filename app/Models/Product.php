@@ -18,6 +18,10 @@ class Product extends Model
      */
     protected $fillable = [
         'nombre',
+        'invoice_id',
+        'product_id',
+        'cantidad',
+        'precio',
     ];
 
     /**
@@ -37,7 +41,6 @@ class Product extends Model
      */
     public function invoices(): BelongsToMany
     {
-        return $this->belongsToMany(Invoice::class, 'invoice_detail');
+        return $this->belongsToMany(Invoice::class, 'invoice_detail', 'product_id', 'invoice_id')->withPivot('cantidad', 'precio', 'product_id');
     }
-
 }
