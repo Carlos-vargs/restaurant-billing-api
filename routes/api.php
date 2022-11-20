@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WaiterController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::post('/categories', [CategoryController::class, 'store']);
 Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::post('/invoices', [InvoiceController::class, 'store']);
+Route::get('/products', [ProductController::class, 'index']);
